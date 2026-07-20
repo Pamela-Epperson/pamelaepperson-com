@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pamela Epperson, Ph.D., PMP — The Reckoning Architecture · OpenQuorum</title>
+<meta name="description" content="OpenQuorum: four live civic accountability tools exposing public board vacancies and routing qualified citizens into the seats of power. Founded by Pamela Epperson, Ph.D., PMP — Federal Health IT & Clinical AI Governance.">
+<meta property="og:title" content="Pamela Epperson — The Reckoning Architecture · OpenQuorum">
+<meta property="og:description" content="Opacity was designed. So was the cure. Four live civic tools tracking board vacancies across the U.S. — Vacancy Clock, ImpactMap, SeatFinder, CivicQuest.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://openquorum.us.com/">
+<meta property="og:image" content="https://openquorum.us.com/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#050D1A">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050D1A;--bg-s:#0A1A2E;--bg-c:#071420;
+  --teal:#1D9E75;--teal-d:rgba(29,158,117,0.12);--teal-b:rgba(29,158,117,0.25);
+  --gold:#C9A84C;--gold-b:#F0C842;--gold-d:rgba(201,168,76,0.12);--gold-bd:rgba(201,168,76,0.22);
+  --purple:#534AB7;--purple-d:rgba(83,74,183,0.12);
+  --t1:#FFF;--t2:rgba(255,255,255,.70);--t3:rgba(255,255,255,.45);--t4:rgba(255,255,255,.22);
+  --border:rgba(201,168,76,0.15);--border-t:rgba(29,158,117,0.15);
+  --ff-d:'DM Serif Display',Georgia,serif;
+  --ff-b:'DM Sans',system-ui,sans-serif;
+  --ff-m:'Montserrat',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--t1);font-family:var(--ff-b);line-height:1.6;overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:68px;
+  background:rgba(5,13,26,0.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(201,168,76,0.1);
+}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-avatar{
+  width:38px;height:38px;border-radius:50%;overflow:hidden;
+  border:1.5px solid rgba(201,168,76,0.4);flex-shrink:0;
+}
+.nav-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.nav-name{font-size:13px;font-weight:500;color:var(--t1);letter-spacing:.03em;}
+.nav-title{font-size:10px;color:var(--t3);letter-spacing:.08em;text-transform:uppercase;margin-top:1px;}
+.nav-links{display:flex;align-items:center;gap:32px;}
+.nav-links a{font-size:13px;color:var(--t3);text-decoration:none;letter-spacing:.04em;transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a.active{color:var(--t1);}
+.nav-cta{
+  background:transparent;border:1px solid var(--gold-bd);color:var(--gold);
+  padding:8px 20px;border-radius:4px;font-size:12px;font-weight:500;
+  letter-spacing:.06em;text-decoration:none;transition:all .2s;
+}
+.nav-cta:hover{background:var(--gold-d);color:var(--gold-b);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:grid;
+  grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+/* bg glow */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 70% at 0% 0%, rgba(201,168,76,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 5% 5%, rgba(255,249,192,0.10) 0%, transparent 40%),
+    radial-gradient(ellipse 40% 60% at 60% 100%, rgba(29,158,117,0.06) 0%, transparent 50%);
+  pointer-events:none;z-index:0;
+}
+.hero-left{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:100px 56px 80px 56px;
+}
+.hero-eyebrow{
+  font-family:var(--ff-m);font-size:11px;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:24px;display:flex;align-items:center;gap:10px;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);opacity:.6;}
+.hero-d1{font-family:var(--ff-d);font-size:clamp(52px,4.5vw,72px);color:var(--t1);font-style:italic;display:block;line-height:1.05;}
+.hero-d2{font-family:var(--ff-d);font-size:clamp(52px,4.5vw,72px);color:var(--gold);display:block;line-height:1.05;margin-bottom:12px;}
+.hero-pivot{
+  font-family:var(--ff-d);font-size:clamp(20px,2vw,28px);
+  color:var(--teal);font-style:italic;margin-bottom:24px;
+}
+.hero-body{font-size:16px;color:var(--t2);line-height:1.75;max-width:440px;margin-bottom:28px;}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold-d);border:1px solid var(--gold-bd);
+  border-radius:20px;padding:6px 16px;margin-bottom:32px;
+  font-family:var(--ff-m);font-size:12px;letter-spacing:.08em;color:var(--gold);
+}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--gold-b);}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{
+  background:linear-gradient(135deg,#C9A84C,#8B6810);color:#050D1A;
+  padding:14px 28px;border-radius:6px;font-size:13px;font-weight:600;
+  letter-spacing:.05em;text-decoration:none;transition:opacity .2s;display:inline-block;
+}
+.btn-primary:hover{opacity:.88;}
+.btn-secondary{
+  background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--t2);
+  padding:14px 28px;border-radius:6px;font-size:13px;letter-spacing:.04em;
+  text-decoration:none;transition:all .2s;display:inline-block;
+}
+.btn-secondary:hover{border-color:var(--t2);color:var(--t1);}
+
+/* HERO PHOTO */
+.hero-right{
+  position:relative;overflow:hidden;
+  min-height:100vh;
+}
+.hero-photo-wrap{
+  position:absolute;inset:0;
+}
+.hero-photo-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+  display:block;
+}
+/* Left fade — blends photo into text column */
+.hero-photo-wrap::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right, var(--bg) 0%, rgba(5,13,26,0.6) 18%, transparent 45%);
+  z-index:1;
+}
+/* Bottom fade — blends into manifesto section */
+.hero-photo-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top, var(--bg) 0%, rgba(5,13,26,0.5) 12%, transparent 35%);
+  z-index:1;
+}
+/* Top fade */
+.hero-top-fade{
+  position:absolute;top:0;left:0;right:0;height:80px;
+  background:linear-gradient(to bottom, var(--bg), transparent);
+  z-index:2;
+}
+/* Conduit line on photo */
+.hero-conduit-overlay{
+  position:absolute;bottom:64px;left:0;right:0;
+  text-align:center;z-index:3;
+  padding:0 24px;
+}
+.hero-conduit-text{
+  font-family:var(--ff-d);font-size:17px;font-style:italic;
+  color:rgba(255,255,255,0.75);
+  text-shadow:0 2px 20px rgba(5,13,26,0.9);
+  display:inline-block;
+  background:linear-gradient(to right, transparent, rgba(5,13,26,0.4), transparent);
+  padding:8px 24px;border-radius:4px;
+  border-top:1px solid rgba(201,168,76,0.2);
+  border-bottom:1px solid rgba(201,168,76,0.2);
+}
+.hero-conduit-text em{color:var(--gold);font-style:normal;}
+
+/* ── MANIFESTO TICKER ── */
+.manifesto{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:rgba(201,168,76,0.04);padding:38px 0;overflow:hidden;
+}
+.manifesto-inner{
+  display:flex;align-items:baseline;gap:24px;
+  white-space:nowrap;animation:ticker 45s linear infinite;
+}
+.manifesto-inner:hover{animation-play-state:paused;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mf-item{font-family:var(--ff-d);font-size:22px;font-style:italic;color:var(--t3);white-space:nowrap;}
+.mf-item.accent{color:var(--gold);}
+.mf-sep{color:var(--border);font-size:20px;padding:0 8px;}
+
+/* ── SHARED SECTION ── */
+section.pad{padding:96px 56px;}
+.sec-eyebrow{
+  font-family:var(--ff-m);font-size:11px;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:16px;display:flex;align-items:center;gap:10px;
+}
+.sec-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold);opacity:.6;}
+.sec-heading{font-family:var(--ff-d);font-size:clamp(30px,3.2vw,46px);color:var(--t1);line-height:1.12;margin-bottom:14px;}
+.sec-subhead{font-size:16px;color:var(--t2);line-height:1.7;max-width:560px;}
+
+/* ── VECTORS ── */
+.vectors{background:var(--bg);}
+.vectors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px;}
+.vec-card{
+  border-radius:16px;border:1px solid rgba(255,255,255,0.07);
+  background:var(--bg-c);overflow:hidden;
+  transition:transform .25s,box-shadow .25s;text-decoration:none;
+  display:flex;flex-direction:column;
+}
+.vec-card:hover{transform:translateY(-4px);}
+.vec-card-top{padding:28px 28px 22px;}
+.vec-level{font-family:var(--ff-m);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+.vec-name{font-family:var(--ff-d);font-size:24px;color:var(--t1);margin-bottom:10px;line-height:1.2;}
+.vec-desc{font-size:13px;color:var(--t3);line-height:1.65;}
+.vec-bottom{
+  margin-top:auto;padding:18px 28px;border-top:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.vec-status{font-size:11px;font-weight:500;letter-spacing:.06em;padding:4px 12px;border-radius:20px;}
+.vec-link{font-size:12px;color:var(--t3);letter-spacing:.04em;}
+.vec-arrow{font-size:16px;transition:transform .2s;}
+.vec-card:hover .vec-arrow{transform:translateX(4px);}
+
+.vec-civic .vec-card-top{background:linear-gradient(135deg,#051a12,#071420);border-bottom:1px solid rgba(29,158,117,0.15);}
+.vec-civic .vec-level{color:var(--teal);}
+.vec-civic .vec-status{background:rgba(29,158,117,0.15);color:var(--teal);}
+.vec-civic .vec-arrow{color:var(--teal);}
+.vec-civic:hover{box-shadow:0 24px 60px rgba(29,158,117,0.12);}
+
+.vec-inst .vec-card-top{background:linear-gradient(135deg,#0d0b1e,#071420);border-bottom:1px solid rgba(83,74,183,0.15);}
+.vec-inst .vec-level{color:#8B84E8;}
+.vec-inst .vec-status{background:rgba(83,74,183,0.15);color:#8B84E8;}
+.vec-inst .vec-arrow{color:#8B84E8;}
+.vec-inst:hover{box-shadow:0 24px 60px rgba(83,74,183,0.12);}
+
+.vec-comm .vec-card-top{background:linear-gradient(135deg,#1a1200,#071420);border-bottom:1px solid rgba(201,168,76,0.15);}
+.vec-comm .vec-level{color:var(--gold);}
+.vec-comm .vec-status{background:rgba(201,168,76,0.15);color:var(--gold);}
+.vec-comm .vec-arrow{color:var(--gold);}
+.vec-comm:hover{box-shadow:0 24px 60px rgba(201,168,76,0.12);}
+
+/* ── PROOF ── */
+.proof{background:var(--bg-s);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);}
+.proof-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:52px;border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;}
+.proof-stat{padding:32px 24px;background:var(--bg-c);border-right:1px solid rgba(255,255,255,.06);}
+.proof-stat:last-child{border-right:none;}
+.proof-n{font-family:var(--ff-d);font-size:40px;color:var(--gold);line-height:1;margin-bottom:8px;}
+.proof-label{font-size:12px;color:var(--t3);line-height:1.5;}
+
+/* ── SPEAKER FEATURE SECTION ── */
+.speaker-feature{
+  background:var(--bg);
+  border-top:1px solid rgba(255,255,255,.04);
+}
+.speaker-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;align-items:stretch;
+  margin-top:0;
+}
+.speaker-photo-col{
+  position:relative;overflow:hidden;
+  min-height:640px;
+}
+.speaker-photo-col img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+  display:block;
+}
+.speaker-photo-col::after{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(to right, transparent 65%, var(--bg) 100%),
+    linear-gradient(to top, var(--bg) 0%, transparent 20%),
+    linear-gradient(to bottom, var(--bg) 0%, transparent 12%);
+}
+.speaker-text-col{
+  padding:72px 56px 72px 40px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.speaker-quote{
+  font-family:var(--ff-d);font-size:26px;font-style:italic;
+  color:var(--t1);line-height:1.4;margin-bottom:24px;
+}
+.speaker-quote em{color:var(--gold);font-style:normal;}
+.speaker-body{font-size:15px;color:var(--t2);line-height:1.75;margin-bottom:32px;}
+.speaker-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.chip{
+  font-size:11px;font-weight:500;padding:5px 14px;border-radius:20px;
+  background:rgba(255,255,255,.06);color:var(--t2);letter-spacing:.04em;
+}
+.chip.gold{background:rgba(201,168,76,0.12);color:var(--gold);}
+.chip.teal{background:rgba(29,158,117,0.12);color:var(--teal);}
+
+/* ── THE STORY ── */
+.story{background:var(--bg);}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;margin-top:52px;}
+.thread-item{display:grid;grid-template-columns:80px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.thread-item:last-child{border-bottom:none;}
+.thread-year{font-family:var(--ff-d);font-size:17px;color:var(--gold);opacity:.7;padding-top:2px;}
+.thread-head{font-size:14px;font-weight:500;color:var(--t1);margin-bottom:4px;}
+.thread-body{font-size:13px;color:var(--t3);line-height:1.65;}
+.thread-tag{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px;margin-top:5px;background:rgba(226,75,74,0.15);color:#F07070;letter-spacing:.05em;}
+.story-thesis{background:var(--bg-c);border:1px solid var(--border);border-radius:16px;padding:30px;margin-bottom:18px;}
+.story-thesis-label{font-family:var(--ff-m);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.story-thesis-text{font-family:var(--ff-d);font-size:22px;font-style:italic;color:var(--t1);line-height:1.4;margin-bottom:12px;}
+.story-thesis-text em{color:var(--gold);font-style:normal;}
+.story-thesis-sub{font-size:14px;color:var(--t2);line-height:1.7;}
+.crispr-box{background:linear-gradient(135deg,rgba(29,158,117,0.08),rgba(201,168,76,0.06));border:1px solid rgba(29,158,117,0.2);border-radius:16px;padding:26px 30px;}
+.crispr-label{font-family:var(--ff-m);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.crispr-text{font-size:14px;color:var(--t2);line-height:1.75;}
+.crispr-text strong{color:var(--teal);}
+
+/* ── BOOKS ── */
+.books{background:var(--bg-s);}
+.books-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:52px;}
+.book-card{border-radius:12px;border:1px solid rgba(255,255,255,.07);background:var(--bg-c);overflow:hidden;}
+.book-spine{height:6px;width:100%;}
+.book-body{padding:22px 20px;}
+.book-num{font-family:var(--ff-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);margin-bottom:8px;}
+.book-title{font-family:var(--ff-d);font-size:18px;color:var(--t1);line-height:1.25;margin-bottom:10px;}
+.book-desc{font-size:12px;color:var(--t3);line-height:1.65;}
+.book-status{margin-top:14px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:10px;display:inline-block;}
+
+/* ── CTA ── */
+.cta-section{background:var(--bg);border-top:1px solid var(--border);}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:52px;}
+.cta-card{border-radius:16px;padding:40px;border:1px solid rgba(255,255,255,.07);background:var(--bg-c);}
+.cta-card.cta-gold{border-color:var(--border);background:linear-gradient(135deg,rgba(201,168,76,0.08),var(--bg-c));}
+.cta-icon{font-size:28px;margin-bottom:16px;}
+.cta-type{font-family:var(--ff-m);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:8px;}
+.cta-title{font-family:var(--ff-d);font-size:26px;color:var(--t1);margin-bottom:12px;line-height:1.2;}
+.cta-body{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:24px;}
+.cta-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;letter-spacing:.05em;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);padding-bottom:2px;transition:border-color .2s;}
+.cta-link:hover{border-color:var(--gold);}
+
+/* ── ABOUT STRIP — photo + credentials ── */
+.about-strip{
+  background:var(--bg-c);
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.about-inner{
+  display:grid;grid-template-columns:280px 1fr;gap:56px;
+  align-items:center;padding:64px 56px;
+}
+.about-photo-wrap{
+  position:relative;border-radius:12px;overflow:hidden;
+  aspect-ratio:3/4;
+  border:1px solid rgba(201,168,76,0.2);
+}
+.about-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.about-photo-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(5,13,26,0.5) 0%, transparent 40%);
+}
+.about-text h3{font-family:var(--ff-d);font-size:32px;color:var(--t1);margin-bottom:12px;line-height:1.2;}
+.about-text h3 em{color:var(--gold);}
+.about-text p{font-size:15px;color:var(--t2);line-height:1.78;margin-bottom:20px;}
+.about-creds{display:flex;flex-wrap:wrap;gap:8px;}
+.about-cred{font-size:11px;color:var(--t3);background:rgba(255,255,255,.06);padding:4px 12px;border-radius:20px;letter-spacing:.04em;}
+
+/* ── FOOTER ── */
+footer{background:var(--bg-c);border-top:1px solid rgba(201,168,76,0.1);padding:40px 56px;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.footer-brand{font-family:var(--ff-d);font-size:18px;color:var(--t1);}
+.footer-brand span{color:var(--gold);}
+.footer-tag{font-size:12px;color:var(--t3);margin-top:4px;}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-size:12px;color:var(--t3);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{font-size:11px;color:var(--t4);letter-spacing:.05em;}
+
+/* ── OPENQUORUM SUITE ── */
+.suite{background:var(--bg-s);border-top:1px solid var(--border-t);}
+.suite-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:52px;}
+.suite-card{border-radius:14px;border:1px solid var(--border-t);background:var(--bg-c);padding:26px 24px;display:flex;flex-direction:column;text-decoration:none;transition:transform .25s,box-shadow .25s;}
+.suite-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(29,158,117,0.14);}
+.suite-icon{font-size:26px;margin-bottom:12px;}
+.suite-name{font-family:var(--ff-d);font-size:20px;color:var(--t1);margin-bottom:8px;}
+.suite-name span{color:var(--teal);}
+.suite-desc{font-size:12.5px;color:var(--t3);line-height:1.65;margin-bottom:18px;}
+.suite-open{margin-top:auto;display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:.05em;color:var(--teal);}
+.suite-status{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);background:var(--teal-d);border:1px solid var(--teal-b);border-radius:12px;padding:2px 9px;display:inline-block;margin-bottom:12px;align-self:flex-start;}
+
+/* ── INTAKE FORM ── */
+.intake{margin-top:56px;border:1px solid var(--border-t);border-radius:16px;background:var(--bg-c);padding:40px;}
+.intake h3{font-family:var(--ff-d);font-size:26px;color:var(--t1);margin-bottom:8px;}
+.intake-sub{font-size:14px;color:var(--t2);margin-bottom:28px;line-height:1.7;}
+.intake-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.field{display:flex;flex-direction:column;gap:6px;}
+.field.full{grid-column:1/-1;}
+.field label{font-size:12px;font-weight:500;color:var(--t2);letter-spacing:.04em;}
+.field label .req{color:var(--gold);}
+.field input,.field select,.field textarea{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:8px;padding:11px 14px;color:var(--t1);font-family:var(--ff-b);font-size:14px;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--teal);outline-offset:1px;border-color:var(--teal);}
+.field select option{background:var(--bg-c);color:var(--t1);}
+.field .err{font-size:11px;color:#F07070;display:none;}
+.field.invalid input{border-color:#F07070;}
+.field.invalid .err{display:block;}
+.interest-opts{display:flex;flex-wrap:wrap;gap:8px;}
+.interest-opts label{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--t2);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:7px 14px;cursor:pointer;}
+.interest-opts label:has(input:checked){border-color:var(--teal);background:var(--teal-d);color:var(--teal);}
+.interest-opts input{accent-color:var(--teal);}
+.consent-row{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--t3);line-height:1.6;}
+.consent-row input{margin-top:3px;accent-color:var(--teal);flex-shrink:0;}
+.intake-submit{background:linear-gradient(135deg,#1D9E75,#0F6E56);color:#fff;border:none;border-radius:8px;padding:14px 34px;font-size:14px;font-weight:600;letter-spacing:.04em;cursor:pointer;font-family:var(--ff-b);}
+.intake-submit:hover{opacity:.9;}
+.intake-submit:disabled{opacity:.5;cursor:not-allowed;}
+.intake-status{margin-top:14px;font-size:13.5px;line-height:1.6;display:none;border-radius:8px;padding:12px 16px;}
+.intake-status.ok{display:block;background:var(--teal-d);border:1px solid var(--teal-b);color:#4ECFA0;}
+.intake-status.fail{display:block;background:rgba(226,75,74,0.1);border:1px solid rgba(226,75,74,0.3);color:#F07070;}
+.intake-privacy{margin-top:18px;font-size:11.5px;color:var(--t3);line-height:1.65;}
+.intake-privacy a{color:var(--teal);}
+.hp-field{position:absolute;left:-9999px;height:1px;width:1px;overflow:hidden;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1000px){
+  .vectors-grid,.suite-grid{grid-template-columns:1fr 1fr;}
+  .proof-grid{grid-template-columns:repeat(3,1fr);}
+  .proof-stat{border-bottom:1px solid rgba(255,255,255,.06);}
+  .books-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:760px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;}
+  .hero-left{padding:110px 24px 40px;}
+  .hero-right{min-height:56vh;}
+  section.pad{padding:64px 22px;}
+  .vectors-grid,.suite-grid,.books-grid,.cta-grid,.story-grid{grid-template-columns:1fr;}
+  .proof-grid{grid-template-columns:1fr 1fr;}
+  .speaker-grid{grid-template-columns:1fr;}
+  .speaker-photo-col{min-height:380px;}
+  .speaker-text-col{padding:40px 24px;}
+  .about-inner{grid-template-columns:1fr;padding:48px 22px;gap:28px;}
+  .about-photo-wrap{max-width:260px;}
+  .intake{padding:26px 18px;}
+  .intake-grid{grid-template-columns:1fr;}
+  footer{padding:32px 22px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <a class="nav-logo" href="#home">
+    <div class="nav-avatar">
+      <img src="pamela_epperson_photo.jpg" alt="Pamela Epperson">
+    </div>
+    <div>
+      <div class="nav-name">Pamela Epperson</div>
+      <div class="nav-title">Ph.D., PMP · Federal Health IT & Clinical AI</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#home" class="active">Home</a>
+    <a href="#openquorum">OpenQuorum</a>
+    <a href="#clinical-ai">Clinical AI</a>
+    <a href="#clarity">Clarity</a>
+    <a href="#story">The Story</a>
+    <a href="#books">Books</a>
+  </div>
+  <a class="nav-cta" href="#get-involved">Work With Me</a>
+</nav>
+
+<!-- ═══════════ HERO — split layout, photo right ═══════════ -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">The Reckoning Architecture</div>
+    <span class="hero-d1">Opacity was</span>
+    <span class="hero-d2">designed.</span>
+    <div class="hero-pivot">So was the cure.</div>
+    <p class="hero-body">
+      Three vectors. One thesis. Built to expose what was hidden,
+      restore what was taken, and route the light where it was always meant to go.
+    </p>
+    <div class="hero-tag"><div class="hero-tag-dot"></div>#bydesign</div>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#vectors">Explore the Work</a>
+      <a class="btn-secondary" href="#get-involved">Work With Pamela</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-photo-wrap">
+      <img src="pamela_epperson_photo.jpg" alt="Pamela Epperson, Ph.D., PMP">
+    </div>
+    <div class="hero-top-fade"></div>
+    <div class="hero-conduit-overlay">
+      <div class="hero-conduit-text">
+        I am the conduit. <em>You are the revelation.</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ MANIFESTO TICKER ═══════════ -->
+<div class="manifesto">
+  <div class="manifesto-inner">
+    <span class="mf-item">Opacity is profitable.</span><span class="mf-sep">·</span>
+    <span class="mf-item accent">#bydesign</span><span class="mf-sep">·</span>
+    <span class="mf-item">Transparency is the intervention.</span><span class="mf-sep">·</span>
+    <span class="mf-item">The sentence "we couldn't find anyone qualified" is a lie they can no longer tell.</span><span class="mf-sep">·</span>
+    <span class="mf-item accent">I am the conduit. You are the revelation.</span><span class="mf-sep">·</span>
+    <span class="mf-item">Clarity is self-care.</span><span class="mf-sep">·</span>
+    <span class="mf-item">The cure enters through the same door as the disease.</span><span class="mf-sep">·</span>
+    <span class="mf-item accent">#bydesign</span><span class="mf-sep">·</span>
+    <span class="mf-item">Opacity is profitable.</span><span class="mf-sep">·</span>
+    <span class="mf-item accent">#bydesign</span><span class="mf-sep">·</span>
+    <span class="mf-item">Transparency is the intervention.</span><span class="mf-sep">·</span>
+    <span class="mf-item">The sentence "we couldn't find anyone qualified" is a lie they can no longer tell.</span><span class="mf-sep">·</span>
+    <span class="mf-item accent">I am the conduit. You are the revelation.</span><span class="mf-sep">·</span>
+    <span class="mf-item">Clarity is self-care.</span><span class="mf-sep">·</span>
+    <span class="mf-item">The cure enters through the same door as the disease.</span><span class="mf-sep">·</span>
+    <span class="mf-item accent">#bydesign</span><span class="mf-sep">·</span>
+  </div>
+</div>
+
+<!-- ═══════════ THREE VECTORS ═══════════ -->
+<section class="pad vectors" id="vectors">
+  <div class="sec-eyebrow">Three vectors. One thesis.</div>
+  <h2 class="sec-heading">The Work</h2>
+  <p class="sec-subhead">Same infrastructure the design used for extraction. Reprogrammed — at the civic, institutional, and community level — for liberation.</p>
+  <div class="vectors-grid">
+    <a class="vec-card vec-civic" href="#openquorum">
+      <div class="vec-card-top">
+        <div class="vec-level">Level 1 — Civic</div>
+        <div class="vec-name">OpenQuorum</div>
+        <p class="vec-desc">Who's in the room making decisions — and who has been systematically kept out. Four live tools across 13 states exposing board vacancies and routing qualified citizens into the seats of power.</p>
+      </div>
+      <div class="vec-bottom">
+        <span class="vec-status">4 tools live · 13 states</span>
+        <span class="vec-link">Explore the suite <span class="vec-arrow">→</span></span>
+      </div>
+    </a>
+    <a class="vec-card vec-inst" href="#clinical-ai" id="clinical-ai">
+      <div class="vec-card-top">
+        <div class="vec-level">Level 2 — Institutional</div>
+        <div class="vec-name">Clinical AI<br>Governance</div>
+        <p class="vec-desc">What decisions get made once the data is in the light — and who controls the framework. AI readiness, role-based governance, and accountability infrastructure for health systems navigating the AI reckoning.</p>
+      </div>
+      <div class="vec-bottom">
+        <span class="vec-status" style="background:rgba(83,74,183,0.15);color:#8B84E8;">Federal & Commercial</span>
+        <span class="vec-link">Consulting services <span class="vec-arrow">→</span></span>
+      </div>
+    </a>
+    <a class="vec-card vec-comm" href="#clarity" id="clarity">
+      <div class="vec-card-top">
+        <div class="vec-level">Level 3 — Community</div>
+        <div class="vec-name">Clarity Is<br>Self-Care</div>
+        <p class="vec-desc">Who finally gets served once the systems are restructured — and who finally knows their worth. A movement, a book series, and a keynote built on one truth: the chaos was designed. And so is the clarity.</p>
+      </div>
+      <div class="vec-bottom">
+        <span class="vec-status">Movement · Books · Speaking</span>
+        <span class="vec-link">The movement <span class="vec-arrow">→</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+
+<!-- ═══════════ OPENQUORUM SUITE — LIVE APPS ═══════════ -->
+<section class="pad suite" id="openquorum">
+  <div class="sec-eyebrow">Level 1 — Civic · live now</div>
+  <h2 class="sec-heading">The Open<span style="color:var(--teal);">Quorum</span> Suite</h2>
+  <p class="sec-subhead">Four live tools. Real board vacancies, real application routes, real accountability — structured for all 50 states + DC, publishing only verified data.</p>
+  <div class="suite-grid">
+    <a class="suite-card" href="https://openquorum-vacancy-clock.vercel.app" target="_blank" rel="noreferrer">
+      <div class="suite-icon" aria-hidden="true">⏱️</div>
+      <span class="suite-status">Live</span>
+      <div class="suite-name">Vacancy <span>Clock</span></div>
+      <p class="suite-desc">Every tracked board seat, how long it has sat empty, and exactly where to apply — counted in days, sourced, and verifiable.</p>
+      <span class="suite-open">Open Vacancy Clock →</span>
+    </a>
+    <a class="suite-card" href="https://openquorum-impactmap.vercel.app" target="_blank" rel="noreferrer">
+      <div class="suite-icon" aria-hidden="true">🗺️</div>
+      <span class="suite-status">Live</span>
+      <div class="suite-name">Impact<span>Map</span></div>
+      <p class="suite-desc">The constituent-harm calculator: estimated decisions deferred and residents affected by every vacancy — press-brief ready.</p>
+      <span class="suite-open">Open ImpactMap →</span>
+    </a>
+    <a class="suite-card" href="https://open-quorum-seat-finder-45q6.vercel.app" target="_blank" rel="noreferrer">
+      <div class="suite-icon" aria-hidden="true">🎯</div>
+      <span class="suite-status">Live</span>
+      <div class="suite-name">Seat<span>Finder</span></div>
+      <p class="suite-desc">Match your expertise to open board seats and generate a professional letter of interest — in your browser, nothing stored.</p>
+      <span class="suite-open">Open SeatFinder →</span>
+    </a>
+    <a class="suite-card" href="https://open-quorum-civic-quest.vercel.app" target="_blank" rel="noreferrer">
+      <div class="suite-icon" aria-hidden="true">🏛️</div>
+      <span class="suite-status">Live</span>
+      <div class="suite-name">Civic<span>Quest</span></div>
+      <p class="suite-desc">Serve a term as Mayor. Fill seats, hold quorum, feel why every empty seat matters — then find the real one waiting for you.</p>
+      <span class="suite-open">Play CivicQuest →</span>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════ PROOF ═══════════ -->
+<section class="pad proof">
+  <div class="sec-eyebrow">The credential</div>
+  <h2 class="sec-heading">Twenty years. Floor-tested.</h2>
+  <p class="sec-subhead">Not theoretical. Every framework built from inside the hardest systems — VA, NIH, federal agencies, and community health organizations.</p>
+  <div class="proof-grid">
+    <div class="proof-stat"><div class="proof-n">20+</div><div class="proof-label">Years in Federal Health IT &amp; AI Enablement</div></div>
+    <div class="proof-stat"><div class="proof-n">170+</div><div class="proof-label">VA Medical Centers — EHR modernization</div></div>
+    <div class="proof-stat"><div class="proof-n">13</div><div class="proof-label">States with live OpenQuorum civic data</div></div>
+    <div class="proof-stat"><div class="proof-n">4</div><div class="proof-label">NIH Institutes — data governance &amp; operations</div></div>
+    <div class="proof-stat"><div class="proof-n">1</div><div class="proof-label">Merck Graduate Dissertation Fellowship — won solo</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ SPEAKER FEATURE — photo-led ═══════════ -->
+<section class="speaker-feature pad" style="padding:0;" id="speaking">
+  <div class="speaker-grid">
+    <div class="speaker-photo-col">
+      <img src="pamela_epperson_photo.jpg" alt="Pamela Epperson speaking">
+    </div>
+    <div class="speaker-text-col">
+      <div class="sec-eyebrow" style="margin-bottom:16px;">Speaking & keynote</div>
+      <div class="speaker-quote">
+        "The room where <em>everything</em> changes."
+      </div>
+      <p class="speaker-body">
+        C-suite boardrooms and community stages — both rooms need the come-to-Jesus moment,
+        just for different reasons. The talk lands because the data is real,
+        the history is documented, and the story is lived.
+        She doesn't perform expertise. She's floor-tested it.
+      </p>
+      <div class="speaker-chips">
+        <span class="chip gold">Clinical AI Governance</span>
+        <span class="chip teal">Civic Accountability</span>
+        <span class="chip gold">#bydesign</span>
+        <span class="chip">Health Equity</span>
+        <span class="chip">Data Transparency</span>
+        <span class="chip teal">Clarity Is Self-Care</span>
+      </div>
+      <a class="btn-primary" href="#contact" style="align-self:flex-start;">Book a Keynote</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ THE STORY ═══════════ -->
+<section class="pad story" id="story">
+  <div class="sec-eyebrow">The origin</div>
+  <h2 class="sec-heading">#bydesign</h2>
+  <div class="story-grid">
+    <div>
+      <div class="thread-item"><div class="thread-year">1619</div><div><div class="thread-head">Bodies as infrastructure</div><div class="thread-body">The original design — Black bodies as economic architecture. Medical experimentation on enslaved people begins. The extraction model is established.</div><span class="thread-tag">Feature, not bug</span></div></div>
+      <div class="thread-item"><div class="thread-year">1865</div><div><div class="thread-head">Incomplete by design</div><div class="thread-body">Formal enslavement ends. The economic and social infrastructure does not. The design adapts — sharecropping, convict leasing, medical exploitation continue.</div><span class="thread-tag">Architecture updates, intention doesn't</span></div></div>
+      <div class="thread-item"><div class="thread-year">1932–72</div><div><div class="thread-head">Tuskegee · Lacks · Forced sterilization</div><div class="thread-body">Black bodies as raw material for a healthcare economy that excludes them. Data extracted, benefit withheld. Reproductive control targeting Black, Indigenous, and poor women.</div><span class="thread-tag">Control the body, control the future</span></div></div>
+      <div class="thread-item"><div class="thread-year">1965</div><div><div class="thread-head">The law changed. The room didn't.</div><div class="thread-body">Civil Rights legislation passes. Board appointments remain closed ecosystems. Healthcare data stays siloed. Vacancy tolerance becomes the new mechanism of exclusion.</div><span class="thread-tag">New language, same design</span></div></div>
+      <div class="thread-item"><div class="thread-year">Now</div><div><div class="thread-head">The reckoning — and the conscription</div><div class="thread-body">AI pulls data into the light. Board vacancies are finally countable. Maternal mortality, abortion bans, economic rollback — the receipts are all in one place. The infrastructure of extraction is being reprogrammed for liberation.</div><span class="thread-tag" style="background:rgba(29,158,117,0.15);color:#4ECFA0;">#bydesign — for good</span></div></div>
+    </div>
+    <div>
+      <div class="story-thesis">
+        <div class="story-thesis-label">The operating thesis</div>
+        <div class="story-thesis-text">Opacity is <em>profitable.</em><br>Transparency is the <em>intervention.</em></div>
+        <p class="story-thesis-sub">The same people kept out of board rooms are the same people whose healthcare data has been extracted, misclassified, and ignored. The AI moment exposes both simultaneously. The work happens at all three levels.</p>
+      </div>
+      <div class="crispr-box">
+        <div class="crispr-label">The CRISPR paradigm</div>
+        <p class="crispr-text">CRISPR-Cas9 enters a cancer cell, finds the precise damage, cuts it, and replaces it with functional code. Viral vectors — once feared as pathogens — now deliver the cure. The mechanism that caused harm is now the mechanism that heals.<br><br><strong>The architecture was always capable of this. It just needed to be conscripted.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ABOUT STRIP — photo + bio ═══════════ -->
+<section class="about-strip" id="about">
+  <div class="about-inner">
+    <div class="about-photo-wrap">
+      <img src="pamela_epperson_photo.jpg" alt="Pamela Epperson, Ph.D., PMP">
+    </div>
+    <div class="about-text">
+      <h3>Pamela Epperson,<br><em>Ph.D., PMP</em></h3>
+      <p>Federal Health IT and Clinical AI Governance consultant with over 20 years of experience building what wasn't there and fixing what wasn't working — at VA, NIH, and across the community health ecosystem.</p>
+      <p>Founder of OpenQuorum. Author of the Clarity Series. Keynote speaker at the intersection of health data, civic accountability, and human worth. The conduit, not the source — deployed to help organizations and individuals find the answer that was always already in them.</p>
+      <p style="font-family:var(--ff-d);font-size:17px;font-style:italic;color:var(--gold);margin-top:8px;">"She wins."</p>
+      <div class="about-creds">
+        <span class="about-cred">Ph.D.</span>
+        <span class="about-cred">PMP</span>
+        <span class="about-cred">Merck Fellow</span>
+        <span class="about-cred">Federal Health IT</span>
+        <span class="about-cred">Clinical AI Governance</span>
+        <span class="about-cred">VA · NIH · HRSA</span>
+        <span class="about-cred">OpenQuorum Founder</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BOOKS ═══════════ -->
+<section class="pad books" id="books">
+  <div class="sec-eyebrow">The written work</div>
+  <h2 class="sec-heading">The Clarity Series</h2>
+  <p class="sec-subhead">Four books. One through-line. From personal faith to systemic reckoning — the same thesis at every level of scale.</p>
+  <div class="books-grid">
+    <div class="book-card">
+      <div class="book-spine" style="background:linear-gradient(90deg,#1D9E75,#0a5a40);"></div>
+      <div class="book-body">
+        <div class="book-num">Book 1</div>
+        <div class="book-title">Faith in Adversity</div>
+        <p class="book-desc">The big sister reaches her hand down. For women 22–30 navigating faith, adversity, and becoming — in the voice that earned the right to speak.</p>
+        <span class="book-status" style="background:rgba(29,158,117,0.15);color:#4ECFA0;">Structured · With companion journal</span>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-spine" style="background:linear-gradient(90deg,#C9A84C,#7a5c0a);"></div>
+      <div class="book-body">
+        <div class="book-num">Book 2</div>
+        <div class="book-title">Clarity Is Self-Care</div>
+        <p class="book-desc">The memoir. The PhD floor. The comeback architecture. The Joseph arc. The life that was being prepared for this exact moment — in her own words.</p>
+        <span class="book-status" style="background:rgba(201,168,76,0.15);color:var(--gold);">Largely written</span>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-spine" style="background:linear-gradient(90deg,#534AB7,#2a2460);"></div>
+      <div class="book-body">
+        <div class="book-num">Book 3</div>
+        <div class="book-title">The Reckoning</div>
+        <p class="book-desc">The manifesto. #bydesign. The historical through-thread from 1619 to the AI moment. The indictment and the cure — named, argued, and proven.</p>
+        <span class="book-status" style="background:rgba(83,74,183,0.15);color:#8B84E8;">In development</span>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-spine" style="background:linear-gradient(90deg,#D85A30,#7a2a10);"></div>
+      <div class="book-body">
+        <div class="book-num">Book 4</div>
+        <div class="book-title">The Architecture</div>
+        <p class="book-desc">The operational manual. How communities, organizations, and individuals do the repair work — the frameworks, the tools, the sequencing, the proof.</p>
+        <span class="book-status" style="background:rgba(216,90,48,0.15);color:#F07070;">Forthcoming</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="pad cta-section" id="contact">
+  <div class="sec-eyebrow">Work with Pamela</div>
+  <h2 class="sec-heading">Two ways in.</h2>
+  <p class="sec-subhead">Whether you need governance infrastructure or a voice in the room — the work is the same thesis at different levels of scale.</p>
+  <div class="cta-grid">
+    <div class="cta-card cta-gold">
+      <div class="cta-icon">🎤</div>
+      <div class="cta-type">Speaking & Keynote</div>
+      <div class="cta-title">The room where the curtain gets pulled back</div>
+      <p class="cta-body">C-suite boardrooms. Community stages. The come-to-Jesus moment that healthcare executives and community women alike need to have — just for different reasons. The talk lands because the data is real and the story is lived.</p>
+      <a class="cta-link" href="#get-involved" data-interest="Media">Book a speaking engagement →</a>
+    </div>
+    <div class="cta-card">
+      <div class="cta-icon">⚡</div>
+      <div class="cta-type">Consulting</div>
+      <div class="cta-title">Clinical AI governance & Federal Health IT</div>
+      <p class="cta-body">AI readiness frameworks. Role-based governance architecture. Data governance maturity that moves stakeholders from hesitation to accountability-based success. 20+ years, 170+ VA medical centers, NIH, and community health — operationalized for your system.</p>
+      <a class="cta-link" href="#get-involved" data-interest="Partner">Start the conversation →</a>
+    </div>
+  </div>
+
+  <div class="intake" id="get-involved">
+    <h3>Get involved</h3>
+    <p class="intake-sub">Bring OpenQuorum to your state, explore a partnership, book a keynote, or build a civic pipeline for your organization. Every message goes straight to Pamela's team.</p>
+    <form id="intake-form" novalidate>
+      <div class="intake-grid">
+        <div class="field">
+          <label for="in-name">Name <span class="req" aria-hidden="true">*</span></label>
+          <input id="in-name" name="name" type="text" autocomplete="name" required aria-required="true">
+          <span class="err" id="in-name-err" role="alert">Please add your name.</span>
+        </div>
+        <div class="field">
+          <label for="in-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="in-email" name="email" type="email" autocomplete="email" required aria-required="true">
+          <span class="err" id="in-email-err" role="alert">Please enter a valid email address.</span>
+        </div>
+        <div class="field">
+          <label for="in-role">Role / organization <span style="color:var(--t4);">(optional)</span></label>
+          <input id="in-role" name="role" type="text" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="in-state">State <span style="color:var(--t4);">(optional)</span></label>
+          <select id="in-state" name="state">
+          <option value="">Choose a state…</option>
+          <option value="Alabama">Alabama</option>\n          <option value="Alaska">Alaska</option>\n          <option value="Arizona">Arizona</option>\n          <option value="Arkansas">Arkansas</option>\n          <option value="California">California</option>\n          <option value="Colorado">Colorado</option>\n          <option value="Connecticut">Connecticut</option>\n          <option value="Delaware">Delaware</option>\n          <option value="District of Columbia">District of Columbia</option>\n          <option value="Florida">Florida</option>\n          <option value="Georgia">Georgia</option>\n          <option value="Hawaii">Hawaii</option>\n          <option value="Idaho">Idaho</option>\n          <option value="Illinois">Illinois</option>\n          <option value="Indiana">Indiana</option>\n          <option value="Iowa">Iowa</option>\n          <option value="Kansas">Kansas</option>\n          <option value="Kentucky">Kentucky</option>\n          <option value="Louisiana">Louisiana</option>\n          <option value="Maine">Maine</option>\n          <option value="Maryland">Maryland</option>\n          <option value="Massachusetts">Massachusetts</option>\n          <option value="Michigan">Michigan</option>\n          <option value="Minnesota">Minnesota</option>\n          <option value="Mississippi">Mississippi</option>\n          <option value="Missouri">Missouri</option>\n          <option value="Montana">Montana</option>\n          <option value="Nebraska">Nebraska</option>\n          <option value="Nevada">Nevada</option>\n          <option value="New Hampshire">New Hampshire</option>\n          <option value="New Jersey">New Jersey</option>\n          <option value="New Mexico">New Mexico</option>\n          <option value="New York">New York</option>\n          <option value="North Carolina">North Carolina</option>\n          <option value="North Dakota">North Dakota</option>\n          <option value="Ohio">Ohio</option>\n          <option value="Oklahoma">Oklahoma</option>\n          <option value="Oregon">Oregon</option>\n          <option value="Pennsylvania">Pennsylvania</option>\n          <option value="Rhode Island">Rhode Island</option>\n          <option value="South Carolina">South Carolina</option>\n          <option value="South Dakota">South Dakota</option>\n          <option value="Tennessee">Tennessee</option>\n          <option value="Texas">Texas</option>\n          <option value="Utah">Utah</option>\n          <option value="Vermont">Vermont</option>\n          <option value="Virginia">Virginia</option>\n          <option value="Washington">Washington</option>\n          <option value="West Virginia">West Virginia</option>\n          <option value="Wisconsin">Wisconsin</option>\n          <option value="Wyoming">Wyoming</option>
+          </select>
+        </div>
+        <div class="field full">
+          <fieldset style="border:none;padding:0;margin:0;">
+            <legend style="font-size:12px;font-weight:500;color:var(--t2);letter-spacing:.04em;margin-bottom:8px;">I'm interested in <span style="color:var(--t4);">(choose any)</span></legend>
+            <div class="interest-opts">
+              <label><input type="checkbox" name="interest" value="Bring OpenQuorum to my state"> Bring OpenQuorum to my state</label>
+              <label><input type="checkbox" name="interest" value="Partner"> Partner</label>
+              <label><input type="checkbox" name="interest" value="Pipeline for my org"> Pipeline for my org</label>
+              <label><input type="checkbox" name="interest" value="Media"> Media / speaking</label>
+              <label><input type="checkbox" name="interest" value="Other"> Other</label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="field full">
+          <label for="in-message">Message</label>
+          <textarea id="in-message" name="message" rows="4"></textarea>
+        </div>
+        <div class="hp-field" aria-hidden="true">
+          <label for="in-company">Company website</label>
+          <input id="in-company" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="field full">
+          <div class="consent-row">
+            <input id="in-consent" name="consent" type="checkbox" required aria-required="true">
+            <label for="in-consent">I agree that this information may be used to respond to my inquiry. Only what I submit here is stored — nothing else is collected, and there are no third-party trackers on this site. <span class="req" aria-hidden="true">*</span></label>
+          </div>
+          <span class="err" id="in-consent-err" role="alert">Please check the consent box to send.</span>
+        </div>
+        <div class="field full">
+          <button class="intake-submit" type="submit" id="intake-btn">Send message →</button>
+          <div class="intake-status" id="intake-status" aria-live="polite"></div>
+          <p class="intake-privacy">Privacy: we store only what you submit on this form, use it only to respond, and never sell or share it. No analytics or third-party trackers run on this page. Prefer email? <a href="mailto:pamela.dirman.epperson@gmail.com">Write directly</a>.</p>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Pamela Epperson, <span>Ph.D., PMP</span></div>
+      <div class="footer-tag">#bydesign · I am the conduit. You are the revelation.</div>
+    </div>
+    <div class="footer-links">
+      <a href="#openquorum">OpenQuorum</a>
+      <a href="#clinical-ai">Clinical AI</a>
+      <a href="#clarity">Clarity</a>
+      <a href="#books">Books</a>
+      <a href="#get-involved">Contact</a>
+    </div>
+    <div class="footer-copy">© 2025 Pamela Epperson, Ph.D., PMP · The Reckoning Architecture</div>
+  </div>
+</footer>
+
+
+<script>
+// Photo fallback — if the portrait file isn't present, swap in a branded placeholder
+document.querySelectorAll('img[src="pamela_epperson_photo.jpg"]').forEach(function(img){
+  img.addEventListener('error',function(){
+    var d=document.createElement('div');
+    d.style.cssText='width:100%;height:100%;min-height:inherit;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0A1A2E,#071420);color:#C9A84C;font-family:Georgia,serif;font-size:42px;font-style:italic;';
+    d.setAttribute('role','img');
+    d.setAttribute('aria-label','Pamela Epperson');
+    d.textContent='PE';
+    img.replaceWith(d);
+  });
+});
+
+// Preselect interest when arriving from a CTA card
+document.querySelectorAll('[data-interest]').forEach(function(a){
+  a.addEventListener('click',function(){
+    var v=a.getAttribute('data-interest');
+    var cb=document.querySelector('#intake-form input[value="'+v+'"], #intake-form input[value^="'+v+'"]');
+    if(cb) cb.checked=true;
+  });
+});
+
+// Intake form — accessible validation + POST to /api/intake (swappable backend)
+(function(){
+  var form=document.getElementById('intake-form');
+  if(!form) return;
+  var status=document.getElementById('intake-status');
+  var btn=document.getElementById('intake-btn');
+  function setInvalid(id,on){
+    var f=document.getElementById(id); if(!f) return;
+    var wrap=f.closest('.field')||f.parentElement;
+    wrap.classList.toggle('invalid',on);
+    f.setAttribute('aria-invalid',on?'true':'false');
+  }
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    status.className='intake-status';
+    var name=document.getElementById('in-name').value.trim();
+    var email=document.getElementById('in-email').value.trim();
+    var consent=document.getElementById('in-consent').checked;
+    var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    setInvalid('in-name',!name);
+    setInvalid('in-email',!emailOk);
+    document.getElementById('in-consent-err').style.display=consent?'none':'block';
+    if(!name||!emailOk||!consent){
+      (!name?document.getElementById('in-name'):!emailOk?document.getElementById('in-email'):document.getElementById('in-consent')).focus();
+      return;
+    }
+    var payload={
+      name:name, email:email,
+      role:document.getElementById('in-role').value.trim(),
+      state:document.getElementById('in-state').value,
+      interest:Array.from(form.querySelectorAll('input[name="interest"]:checked')).map(function(c){return c.value;}),
+      message:document.getElementById('in-message').value.trim(),
+      website:document.getElementById('in-company').value, // honeypot — humans leave this empty
+      submittedAt:new Date().toISOString(),
+    };
+    btn.disabled=true; btn.textContent='Sending…';
+    try{
+      var r=await fetch('/api/intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      var d=await r.json().catch(function(){return {};});
+      if(r.ok&&d.ok){
+        status.className='intake-status ok';
+        status.textContent='Thank you — your message is in. You\'ll hear back at '+email+'.';
+        form.reset();
+      }else{
+        throw new Error(d.error||('HTTP '+r.status));
+      }
+    }catch(err){
+      status.className='intake-status fail';
+      status.innerHTML='Something went wrong sending your message ('+String(err.message||err).replace(/</g,'&lt;')+'). Please email <a href="mailto:pamela.dirman.epperson@gmail.com" style="color:#F0C842;">pamela.dirman.epperson@gmail.com</a> directly.';
+    }finally{
+      btn.disabled=false; btn.textContent='Send message →';
+    }
+  });
+})();
+</script>
+</body>
+</html>
