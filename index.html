@@ -768,14 +768,14 @@ footer{background:var(--bg-c);border-top:1px solid rgba(201,168,76,0.1);padding:
       <div class="cta-type">Speaking & Keynote</div>
       <div class="cta-title">The room where the curtain gets pulled back</div>
       <p class="cta-body">C-suite boardrooms. Community stages. The come-to-Jesus moment that healthcare executives and community women alike need to have — just for different reasons. The talk lands because the data is real and the story is lived.</p>
-      <a class="cta-link" href="#get-involved" data-interest="Media">Book a keynote →</a>
+      <a class="cta-link" href="#get-involved" data-interest="Media" data-offer="keynote-corporate">Book a keynote →</a>
     </div>
     <div class="cta-card">
       <div class="cta-icon">⚡</div>
       <div class="cta-type">Consulting</div>
       <div class="cta-title">Clinical AI governance & Federal Health IT</div>
       <p class="cta-body">AI readiness frameworks. Role-based governance architecture. Data governance maturity that moves stakeholders from hesitation to accountability-based success. 20+ years, 170+ VA medical centers, NIH, and community health — operationalized for your system.</p>
-      <a class="cta-link" href="#get-involved" data-interest="Consulting engagement">Start with a Discovery Brief →</a>
+      <a class="cta-link" href="#get-involved" data-interest="Consulting engagement" data-offer="discovery-brief">Start with a Discovery Brief →</a>
     </div>
   </div>
 
@@ -784,11 +784,11 @@ footer{background:var(--bg-c);border-top:1px solid rgba(201,168,76,0.1);padding:
     <div class="cta-title">The work is real. So is its cost.</div>
     <p class="cta-body">Twenty years and every kind of floor — academic, professional, mental, emotional, physical, spiritual. These frameworks were earned, not borrowed. They are priced for legacy dividends, not for free "thoughts." Engagements are priced by outcome, not by hour.</p>
     <ul style="list-style:none;padding:0;margin:16px 0 0;display:grid;gap:12px;">
-      <li class="cta-body"><strong>Discovery Brief</strong> — $14,500 fixed. A written finding: what is drifting, what it is costing you per day, what closes it, and in what order. Named owners, sequenced. Priced under the federal micro-purchase threshold, so a government buyer can authorize it on a purchase card — no solicitation required.<span style="display:block;margin-top:8px;"><a class="cta-link" href="#get-involved" data-interest="Consulting engagement">Request the Discovery Brief →</a></span></li>
-      <li class="cta-body"><strong>Inventory &amp; Triage Sprint</strong> — from $35,000. Your decision inventory, instrumented and triaged. Owners named, and one workflow carried all the way into operational use.<span style="display:block;margin-top:8px;"><a class="cta-link" href="#get-involved" data-interest="Consulting engagement">Request a scope →</a></span></li>
-      <li class="cta-body"><strong>60-Day Governance Build</strong> — from $95,000. The governance operating system installed end to end: intake, risk triage, workflows, evidence, monitoring.<span style="display:block;margin-top:8px;"><a class="cta-link" href="#get-involved" data-interest="Consulting engagement">Request a scope →</a></span></li>
-      <li class="cta-body"><strong>Operate, monitor &amp; advise</strong> — retainers from $12,000 / month, on six- to twelve-month terms.<span style="display:block;margin-top:8px;"><a class="cta-link" href="#get-involved" data-interest="Consulting engagement">Request a retainer →</a></span></li>
-      <li class="cta-body"><strong>Speaking &amp; keynote</strong> — corporate and health system from $15,000. Association and nonprofit from $7,500. Community, HBCU and faith venues at cost or sponsor-funded, by design.<span style="display:block;margin-top:8px;"><a class="cta-link" href="#get-involved" data-interest="Media">Book a keynote →</a></span></li>
+      <li class="cta-body"><strong>Discovery Brief</strong> — $14,500 fixed. A written finding: what is drifting, what it is costing you per day, what closes it, and in what order. Named owners, sequenced. Priced under the federal micro-purchase threshold, so a government buyer can authorize it on a purchase card — no solicitation required.<span style="display:block;margin-top:8px;"><a class="cta-link" href="#get-involved" data-interest="Consulting engagement" data-offer="discovery-brief">Request the Discovery Brief →</a></span></li>
+      <li class="cta-body"><strong>Inventory &amp; Triage Sprint</strong> — from $35,000. Your decision inventory, instrumented and triaged. Owners named, and one workflow carried all the way into operational use.<span style="display:block;margin-top:8px;"><a class="cta-link" href="#get-involved" data-interest="Consulting engagement" data-offer="triage-sprint">Request a scope →</a></span></li>
+      <li class="cta-body"><strong>60-Day Governance Build</strong> — from $95,000. The governance operating system installed end to end: intake, risk triage, workflows, evidence, monitoring.<span style="display:block;margin-top:8px;"><a class="cta-link" href="#get-involved" data-interest="Consulting engagement" data-offer="governance-build-60">Request a scope →</a></span></li>
+      <li class="cta-body"><strong>Operate, monitor &amp; advise</strong> — retainers from $12,000 / month, on six- to twelve-month terms.<span style="display:block;margin-top:8px;"><a class="cta-link" href="#get-involved" data-interest="Consulting engagement" data-offer="operate-retainer">Request a retainer →</a></span></li>
+      <li class="cta-body"><strong>Speaking &amp; keynote</strong> — corporate and health system from $15,000. Association and nonprofit from $7,500. Community, HBCU and faith venues at cost or sponsor-funded, by design.<span style="display:block;margin-top:8px;"><a class="cta-link" href="#get-involved" data-interest="Media" data-offer="keynote-corporate">Book a keynote →</a></span></li>
       <li class="cta-body"><strong>Time on my calendar</strong> — $150 for any scheduled conversation. There is no free "let me pick your brain."</li>
     </ul>
     <p class="cta-body" style="margin-top:16px;"><em>This is the filter, not the fence. If you are novaturient — genuinely ready to alter something — serious inquiries move fast.</em></p>
@@ -837,6 +837,7 @@ footer{background:var(--bg-c);border-top:1px solid rgba(201,168,76,0.1);padding:
           <label for="in-message">Message</label>
           <textarea id="in-message" name="message" rows="4"></textarea>
         </div>
+        <input type="hidden" id="in-offer" name="offer_slug" value="">
         <div class="hp-field" aria-hidden="true">
           <label for="in-company">Company website</label>
           <input id="in-company" name="website" type="text" tabindex="-1" autocomplete="off">
@@ -896,6 +897,9 @@ document.querySelectorAll('[data-interest]').forEach(function(a){
     var v=a.getAttribute('data-interest');
     var cb=document.querySelector('#intake-form input[value="'+v+'"], #intake-form input[value^="'+v+'"]');
     if(cb) cb.checked=true;
+    var offer=a.getAttribute('data-offer');
+    var of=document.getElementById('in-offer');
+    if(of && offer) of.value=offer;
   });
 });
 
@@ -931,6 +935,8 @@ document.querySelectorAll('[data-interest]').forEach(function(a){
       state:document.getElementById('in-state').value,
       interest:Array.from(form.querySelectorAll('input[name="interest"]:checked')).map(function(c){return c.value;}),
       message:document.getElementById('in-message').value.trim(),
+      offer_slug:(document.getElementById('in-offer')||{}).value||'',
+      source:'website',
       website:document.getElementById('in-company').value, // honeypot — humans leave this empty
       submittedAt:new Date().toISOString(),
     };

@@ -38,7 +38,22 @@ export default async function handler(req, res) {
     return res.status(400).json({ ok: false, error: "Name and a valid email are required." });
   }
 
-  const record = { name, email, role, state, interest, message };
+  // Which offer drove the inquiry. Validated against the catalog so an unknown
+  // value can never blow up the insert on a foreign-key violation.
+  const OFFER_SLUGS = new Set([
+    "discovery-brief", "triage-sprint", "governance-build-60", "operate-retainer",
+    "gcmm-assessment", "strategic-session", "ai-readiness", "fractional-officer",
+    "board-advisory", "keynote-corporate", "keynote-association", "keynote-community",
+    "workshop-day", "pipeline-admin", "calendar-time",
+  ]);
+  const rawOffer = String(body.offer_slug || "").trim();
+  const offer_slug = OFFER_SLUGS.has(rawOffer) ? rawOffer : null;
+
+  const SOURCES = new Set(["website", "linkedin", "referral", "keynote"]);
+  const rawSource = String(body.source || "website").trim();
+  const source = SOURCES.has(rawSource) ? rawSource : "website";
+
+  const record = { name, email, role, state, interest, message, offer_slug, source };
 
   try {
     // ── Option 1: Supabase ──
