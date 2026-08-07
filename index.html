@@ -852,7 +852,7 @@ footer{background:var(--bg-c);border-top:1px solid rgba(201,168,76,0.1);padding:
         <div class="field full">
           <button class="intake-submit" type="submit" id="intake-btn">Send message →</button>
           <div class="intake-status" id="intake-status" aria-live="polite"></div>
-          <p class="intake-privacy">Privacy: we store only what you submit on this form, use it only to respond, and never sell or share it. No analytics or third-party trackers run on this page. Prefer email? <a href="mailto:PEpperson@hgzenterprise.com">Write directly</a>.</p>
+          <p class="intake-privacy">Privacy: we store only what you submit on this form, use it only to respond, and never sell or share it. No analytics or third-party trackers run on this page. Prefer email? <a href="mailto:admin@pamelaepperson.com">Write directly</a>.</p>
         </div>
       </div>
     </form>
@@ -954,7 +954,7 @@ document.querySelectorAll('[data-interest]').forEach(function(a){
     }catch(err){
       status.className='intake-status fail';
       if(window.console&&console.warn) console.warn('[intake]',err);
-      status.innerHTML='Something went wrong sending your message. Please email <a href="mailto:PEpperson@hgzenterprise.com" style="color:#F0C842;">PEpperson@hgzenterprise.com</a> directly.';
+      status.innerHTML='Something went wrong sending your message. Please email <a href="mailto:admin@pamelaepperson.com" style="color:#F0C842;">admin@pamelaepperson.com</a> directly.';
     }finally{
       btn.disabled=false; btn.textContent='Send message →';
     }
