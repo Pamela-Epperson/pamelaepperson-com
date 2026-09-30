@@ -54,7 +54,7 @@
       <div class="lqw-scene" data-dur="6500" data-eyes="open"><div class="lqw-eyes" aria-hidden="true"><span class="lqw-eye" data-iris="brown"></span><span class="lqw-eye" data-iris="hazel"></span></div><p class="lqw-line">Seeing them is the whole discipline. It&rsquo;s the first move of the work.</p></div>
       <div class="lqw-scene lqw-small" data-dur="8000"><p class="lqw-line">A dependency no one names. A decision layer no one&rsquo;s minding. <span class="lqw-hl">That&rsquo;s the shape of what Pamela finds.</span></p></div>
       <div class="lqw-scene" data-dur="7500"><p class="lqw-line">She doesn&rsquo;t write a report about it. She ships the <span class="lqw-hl">instrument</span> that lets ordinary people act on it.</p></div>
-      <div class="lqw-scene" data-dur="7000"><p class="lqw-line" style="margin-bottom:4px;">OpenQuorum &mdash; live, in every state:</p><div class="lqw-nums" aria-hidden="true"><div><span class="lqw-fn" data-stat="jurisdictions">51</span><span class="lqw-fl">states + DC</span></div><div><span class="lqw-fn" data-stat="boards">430</span><span class="lqw-fl">boards</span></div><div><span class="lqw-fn" data-stat="seats">4,951</span><span class="lqw-fl">seats</span></div></div></div>
+      <div class="lqw-scene" data-dur="7000"><p class="lqw-line" style="margin-bottom:4px;">OpenQuorum &mdash; live, in every state:</p><div class="lqw-nums" aria-hidden="true"><div><span class="lqw-fn" data-stat="jurisdictions">51</span><span class="lqw-fl">states + DC</span></div><div><span class="lqw-fn" data-stat="boards">447</span><span class="lqw-fl">boards</span></div><div><span class="lqw-fn" data-stat="seats">5,122</span><span class="lqw-fl">seats</span></div></div></div>
       <div class="lqw-scene" data-dur="8000"><p class="lqw-line">&ldquo;We couldn&rsquo;t find anyone qualified&rdquo; was never true. <span class="lqw-hl">It was unmapped.</span></p></div>
       <div class="lqw-scene" data-dur="7500"><p class="lqw-line">Same method, three scales: <span class="lqw-hl">civic, institutional, community.</span> One reckoning.</p></div>
       <div class="lqw-scene" data-dur="99999999"><p class="lqw-line">Once you see it, <span class="lqw-go">you LOOQ away at your own peril.</span></p><div class="lqw-final"><div class="lqw-apps"><a class="lqw-btn lqw-primary" href="https://seatfinder.us.com" target="_blank" rel="noopener">Find your seat &rarr;</a><a class="lqw-btn lqw-app" href="https://vacancyclock.us.com" target="_blank" rel="noopener">LOOQ for Vacancies</a><a class="lqw-btn lqw-app" href="https://impactmap.us.com" target="_blank" rel="noopener">Work not done</a><a class="lqw-btn lqw-app" href="https://civicquest.us.com" target="_blank" rel="noopener">Legacy LOOQ forward</a></div><button class="lqw-btn lqw-ghost" id="lqwDone">Take me back</button></div></div>
@@ -96,7 +96,7 @@
     [].slice.call(film.querySelectorAll('.lqw-eye')).forEach(function(el){ el.innerHTML = makeEye(el.getAttribute('data-iris')); });
 
     /* dynamic numbers (site root /oq-stats.json, with baked fallback) */
-    var FALLBACK={jurisdictions:51,boards:430,seats:4951};
+    var FALLBACK={jurisdictions:51,boards:447,seats:5122};
     function paint(s){ film.querySelectorAll('[data-stat]').forEach(function(el){ var k=el.getAttribute('data-stat'); if(s[k]!=null) el.setAttribute('data-count',s[k]); }); }
     paint(FALLBACK);
     fetch('/oq-stats.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){ if(j) paint(Object.assign({},FALLBACK,j)); }).catch(function(){});
